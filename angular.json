@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-flashcards"
+    }
+  },
+  "defaultProject": "ng-flashcards",
+  "cli": {
+    "analytics": false
+  }
 }
