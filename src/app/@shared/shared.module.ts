@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-import { sharedRoutingModule } from './shared-routing.module';
+import { CustomMaterialModule } from "./../@custom-material/custom-material.module";
 import { LayoutComponent } from './layout/layout.component';
 
 
 @NgModule({
   declarations: [LayoutComponent],
   imports: [
-    CommonModule,
-    sharedRoutingModule
+    CustomMaterialModule,
+    RouterModule,
+    CommonModule
   ],
   exports:[]
 })
-export class sharedModule { }
+export class SharedModule { }
