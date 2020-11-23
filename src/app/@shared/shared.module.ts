@@ -12,6 +12,8 @@ import { LayoutComponent } from './layout/layout.component';
     RouterModule,
     CommonModule
   ],
-  exports:[]
+  exports:[
+    CustomMaterialModule
+  ]
 })
 export class SharedModule { }
