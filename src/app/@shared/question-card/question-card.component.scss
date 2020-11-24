@@ -1,3 +1,39 @@
 .card {
   width: 300px;
 }
+
+.mat-card {
+  padding: 0px !important;
+}
+
+.mat-card-header {
+  padding-top: 16px !important;
+}
+
+.mat-card-header.correct {
+  background: #51be51;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.mat-card-header.incorrect {
+  background: #ec1e0f;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.mat-card-header.correct .mat-icon,
+.mat-card-header.incorrect .mat-icon {
+  color: #eee;
+}
+
+.mat-card-actions {
+  margin: 0 !important;
+  padding: 0 0 16px 0px !important;
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.mat-card-actions > .mat-button {
+  margin: 0 !important;
+}

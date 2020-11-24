@@ -6,7 +6,16 @@
 
     <div class="container" fxLayout="row" fxLayoutAlign="center none">
       <div fxFlex="50%" class="text-center animate">
-        <app-question-card></app-question-card>
+        <div class="flashs">
+          <app-question-card
+            *ngFor="let flash of flashs; trackBy: trackByFlashId"
+            [question]="flash"
+            (onToggleCard)="handleToggleCard($event)"
+            (onDelete)="handleDelete($event)"
+            (onEdit)="handleEdit($event)"
+            (onRememberedChange)="handleRememberedChange($event)"
+          ></app-question-card>
+        </div>
       </div>
     </div>
   </div>
