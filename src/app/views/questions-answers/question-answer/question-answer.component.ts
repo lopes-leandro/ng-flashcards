@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IQuestion } from 'src/app/models/question';
+import {FormControl, Validators} from '@angular/forms';
 
 function getRandomNumber() {
   return Math.floor(Math.random() * 10000);
@@ -31,6 +32,8 @@ export class QuestionAnswerComponent implements OnInit {
 
   editing = false;
   editingId: number;
+  question: string
+  answer: string
 
   constructor() { }
 
@@ -61,4 +64,5 @@ export class QuestionAnswerComponent implements OnInit {
     const flash = this.flashs.find(flash => flash.id === id);
     flash.remembered = flag;
   }
+
 }

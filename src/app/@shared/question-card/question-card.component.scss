@@ -4,7 +4,10 @@
 
 .mat-card {
   padding: 0px !important;
+  margin-bottom: 16px;
+  margin-right: 16px;
 }
+
 
 .mat-card-header {
   padding-top: 16px !important;
@@ -27,9 +30,16 @@
   color: #eee;
 }
 
+.mat-card-content {
+  padding: 16px;
+  margin: 0;
+  text-align: center;
+  border-top: 1px solid rgba(105, 105, 105, 0.5);
+  border-bottom: 1px solid rgba(105, 105, 105, 0.5);
+}
+
 .mat-card-actions {
   margin: 0 !important;
-  padding: 0 0 16px 0px !important;
   display: flex !important;
   justify-content: space-around !important;
 }
