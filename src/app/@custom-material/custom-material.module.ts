@@ -5,9 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatCardModule} from '@angular/material/card'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [],
@@ -20,6 +22,8 @@ import {MatCardModule} from '@angular/material/card';
     MatMenuModule,
     MatBadgeModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     CommonModule,
   ],
   exports: [
@@ -31,6 +35,8 @@ import {MatCardModule} from '@angular/material/card';
     MatMenuModule,
     MatBadgeModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
 })
