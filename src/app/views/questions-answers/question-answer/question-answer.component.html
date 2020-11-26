@@ -6,42 +6,38 @@
 
     <div class="container" fxLayout="row" fxLayoutAlign="center none">
       <div fxFlex="50%" class="text-center animate">
-        <form class="form">
-          <h1>Add New Question</h1>
+        <form class="form" #flashForm="ngForm">
+          <h1>{{editing ? 'Update':'Add New'}} Question</h1>
           <mat-form-field class="full-fields">
             <mat-label>Question</mat-label>
-            <input
-              matInput
-              placeholder="Ex. New version Angular?"
-              name="question"
-              [(ngModel)]="question"
-              required
-            />
+            <input matInput placeholder="Ex. New version Angular?" name="question" [(ngModel)]="flash.question"
+              #question required />
           </mat-form-field>
           <mat-form-field class="full-fields">
             <mat-label>Answer</mat-label>
-            <input
-              matInput
-              placeholder="Ex. version 11"
-              name="answer"
-              [(ngModel)]="answer"
-              required
-            />
+            <input matInput placeholder="Ex. version 11" name="answer" [(ngModel)]="flash.answer" #answer required />
           </mat-form-field>
           <section>
-            <button mat-raised-button color="primary">Submit</button>
-            <button mat-raised-button>Clear</button>
+            <button *ngIf="editing; else bntSubmit" mat-raised-button color="accent" (click)="handleUpdate()" type="submit" [disabled]="flashForm.invalid">Update</button>
+            <ng-template #bntSubmit>
+              <button mat-raised-button color="accent" (click)="handleSubmit()" type="submit" [disabled]="flashForm.invalid">Submit</button>
+            </ng-template>
+            <button *ngIf="editing; else btnClear" mat-raised-button (click)="handleCancel()">Cancel</button>
+            <ng-template #btnClear>
+              <button mat-raised-button (click)="handleClear()">Clear</button>
+            </ng-template>
+            
           </section>
         </form>
+        <section style="text-align: start;">
+          <pre>
+            {{flash | json}}
+          </pre>
+        </section>
         <div class="flashs">
-          <app-question-card
-            *ngFor="let flash of flashs; trackBy: trackByFlashId"
-            [question]="flash"
-            (onToggleCard)="handleToggleCard($event)"
-            (onDelete)="handleDelete($event)"
-            (onEdit)="handleEdit($event)"
-            (onRememberedChange)="handleRememberedChange($event)"
-          ></app-question-card>
+          <app-question-card *ngFor="let flash of flashs; trackBy: trackByFlashId" [question]="flash"
+            (onToggleCard)="handleToggleCard($event)" (onDelete)="handleDelete($event)" (onEdit)="handleEdit($event)"
+            (onRememberedChange)="handleRememberedChange($event)"></app-question-card>
         </div>
       </div>
     </div>
