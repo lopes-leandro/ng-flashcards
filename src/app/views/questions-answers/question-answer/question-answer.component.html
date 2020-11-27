@@ -10,12 +10,12 @@
           <h1>{{editing ? 'Update':'Add New'}} Question</h1>
           <mat-form-field class="full-fields">
             <mat-label>Question</mat-label>
-            <input matInput placeholder="Ex. New version Angular?" name="question" [(ngModel)]="flash.question"
+            <input matInput placeholder="Ex. New version Angular?" name="question" [(ngModel)]="question.question"
               #question required />
           </mat-form-field>
           <mat-form-field class="full-fields">
             <mat-label>Answer</mat-label>
-            <input matInput placeholder="Ex. version 11" name="answer" [(ngModel)]="flash.answer" #answer required />
+            <input matInput placeholder="Ex. version 11" name="answer" [(ngModel)]="question.answer" #answer required />
           </mat-form-field>
           <section>
             <button *ngIf="editing; else bntSubmit" mat-raised-button color="accent" (click)="handleUpdate()" type="submit" [disabled]="flashForm.invalid">Update</button>
@@ -29,13 +29,13 @@
             
           </section>
         </form>
-        <section style="text-align: start;">
+        <!-- <section style="text-align: start;">
           <pre>
-            {{flash | json}}
+            {{question | json}}
           </pre>
-        </section>
+        </section> -->
         <div class="flashs">
-          <app-question-card *ngFor="let flash of flashs; trackBy: trackByFlashId" [question]="flash"
+          <app-question-card *ngFor="let question of questions; trackBy: trackByFlashId" [question]="question"
             (onToggleCard)="handleToggleCard($event)" (onDelete)="handleDelete($event)" (onEdit)="handleEdit($event)"
             (onRememberedChange)="handleRememberedChange($event)"></app-question-card>
         </div>
