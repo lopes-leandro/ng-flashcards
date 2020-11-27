@@ -3,5 +3,5 @@ export interface IQuestion {
   answer: string;
   show: boolean;
   id: number;
-  remembered?: "correct" | "incorrect";
+  remembered?: 'correct' | 'incorrect';
 }

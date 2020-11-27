@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IQuestion } from 'src/app/models/question';
+import { QuestionService } from './../service/question.service';
 import { NgForm } from '@angular/forms';
-
-function getRandomNumber() {
-  return Math.floor(Math.random() * 10000);
-}
+import { IQuestion } from 'src/app/models/question';
 
 @Component({
   selector: 'app-question-answer',
@@ -15,31 +12,19 @@ export class QuestionAnswerComponent implements OnInit {
 
   @ViewChild('flashForm', { static: true }) flashForm: NgForm;
 
-  flashs: IQuestion[] = [{
-    question: 'Question 1',
-    answer: 'Answer 1',
-    show: false,
-    id: getRandomNumber(),
-  }, {
-    question: 'Question 2',
-    answer: 'Answer 2',
-    show: false,
-    id: getRandomNumber(),
-  }, {
-    question: 'Question 3',
-    answer: 'Answer 3',
-    show: false,
-    id: getRandomNumber(),
-  }];
-
+  questions: IQuestion[] = [];
   editing = false;
   editingId: number;
-  flash = {
+  question: IQuestion = {
     question: '',
     answer: '',
+    id: undefined,
+    show: undefined
   };
 
-  constructor() { }
+  constructor(private questionService: QuestionService) {
+    this.questions = this.questionService.questions;
+  }
 
   ngOnInit(): void {
   }
@@ -49,50 +34,40 @@ export class QuestionAnswerComponent implements OnInit {
   }
 
   handleToggleCard(id: number) {
-    const flash = this.flashs.find(f => f.id === id);
-    flash.show = !flash.show;
+    this.questionService.toggleQuestion(id);
   }
 
   handleDelete(id: number) {
-    const flashId = this.flashs.findIndex(flash => flash.id === id);
-    this.flashs.splice(flashId, 1);
+    this.questionService.deleteQuestion(id);
   }
 
   handleEdit(id: number) {
+    this.question = this.questionService.getQuestion(id);
     this.editing = true;
     this.editingId = id;
-    // TODO: Adicionaremos lógica de edição após adicionar o formulário
-    const flash = this.flashs.find(f => f.id === id);
-    this.flash.question = flash.question;
-    this.flash.answer = flash.answer;
   }
 
   handleRememberedChange({ id, flag }) {
-    const flash = this.flashs.find(f => f.id === id);
-    flash.remembered = flag;
+    this.questionService.rememberedChange(id, flag);
   }
 
   handleSubmit(): void {
-    this.flashs.push({
-      id: getRandomNumber(),
-      show: false,
-      ...this.flash,
-    });
+    this.questionService.addQuestion(this.question);
     this.handleClear();
   }
 
   handleClear(): void {
-    this.flash = {
+    this.question = {
       question: '',
-      answer: ''
+      answer: '',
+      show: undefined,
+      id: undefined
     };
     this.flashForm.reset();
   }
 
   handleUpdate(): void {
-    const flash = this.flashs.find(f => f.id === this.editingId);
-    flash.question = this.flash.question;
-    flash.answer = this.flash.answer;
+    this.questionService.updateQuestion(this.editingId, this.question);
     this.handleCancel();
   }
   handleCancel(): void {

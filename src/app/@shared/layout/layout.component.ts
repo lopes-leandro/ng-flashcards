@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
+    // tslint:disable-next-line:variable-name
     _mobileQueryListener: () => void;
     mobileQuery: MediaQueryList;
     showSpinner: boolean;
