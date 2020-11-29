@@ -35,7 +35,7 @@
           </pre>
         </section> -->
         <div class="flashs">
-          <app-question-card *ngFor="let item of questions; trackBy: trackByQuestionId" [question]="item"
+          <app-question-card *ngFor="let item of questions$ | async; trackBy: trackByQuestionId" [question]="item"
             (oToggleCard)="handleToggleCard($event)" (oDelete)="handleDelete($event)" (oEdit)="handleEdit($event)"
             (oRememberedChange)="handleRememberedChange($event)"></app-question-card>
         </div>

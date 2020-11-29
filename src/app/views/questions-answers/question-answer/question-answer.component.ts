@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { QuestionService } from './../service/question.service';
 import { NgForm } from '@angular/forms';
 import { IQuestion } from 'src/app/models/question';
-import { Subject, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+// import { Subject, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +15,7 @@ export class QuestionAnswerComponent implements OnInit, OnDestroy {
   @ViewChild('flashForm', { static: true }) flashForm: NgForm;
 
   mumbers = [];
-  questions: IQuestion[] = [];
+  // questions: IQuestion[] = [];
   editing = false;
   editingId: number;
   questionState: IQuestion = {
@@ -23,22 +24,24 @@ export class QuestionAnswerComponent implements OnInit, OnDestroy {
     id: 0,
     show: false,
   };
-  subscription: Subscription;
+  // subscription: Subscription;
+  questions$: Observable<IQuestion[]>;
 
   constructor(private questionService: QuestionService) {
-    this.questions = this.questionService.questions;
+    // this.questions = this.questionService.questions;
   }
 
   ngOnInit(): void {
-    this.subscription = this.questionService.questions$.subscribe(
-      (values) => (this.questions = values)
-    );
+    // this.subscription = this.questionService.questions$.subscribe(
+    //   (values) => (this.questions = values)
+    // );
+    this.questions$ = this.questionService.questions$;
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    // if (this.subscription) {
+    //   this.subscription.unsubscribe();
+    // }
   }
 
   trackByQuestionId(index, flash) {
@@ -89,17 +92,17 @@ export class QuestionAnswerComponent implements OnInit, OnDestroy {
     this.handleClear();
   }
 
-  handleSubjectTest() {
-    const subject = new Subject();
-    subject
-      .pipe(
-        filter((value) => value !== 1),
-        tap((value) => console.warn(value))
-      )
-      .subscribe((value) => this.mumbers.push(value));
-    subject.next(1);
-    subject.next(2);
-    subject.next(3);
-    console.warn(this.mumbers);
-  }
+  // handleSubjectTest() {
+  //   const subject = new Subject();
+  //   subject
+  //     .pipe(
+  //       filter((value) => value !== 1),
+  //       tap((value) => console.warn(value))
+  //     )
+  //     .subscribe((value) => this.mumbers.push(value));
+  //   subject.next(1);
+  //   subject.next(2);
+  //   subject.next(3);
+  //   console.warn(this.mumbers);
+  // }
 }
