@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IQuestion } from 'src/app/models/question';
 
 @Component({
   selector: 'app-question-card',
   templateUrl: './question-card.component.html',
   styleUrls: ['./question-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionCardComponent implements OnInit {
   @Output() oToggleCard = new EventEmitter();
